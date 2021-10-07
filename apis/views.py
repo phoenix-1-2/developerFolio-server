@@ -4,7 +4,7 @@ from datetime import datetime, timedelta
 import requests
 from django.conf import settings
 from django.core.mail import EmailMultiAlternatives
-
+from django.core.mail import send_mail
 
 client = settings.CLIENT
 
@@ -40,6 +40,17 @@ def send_thankyou_mail(user):
     msg.send()
 
 
+def send_mail_to_me(user):
+    subject = f"Hey Nikhil,{user['name']} Messaged You!!"
+    from_mail = settings.EMAIL_HOST_USER
+    to_mail = [
+        "bhasin.nikhil.12@gmail.com",
+        "nikhil.bhasin124@gmail.com",
+    ]
+    message = f"Hey Nikhil,\n{user['name']} has messaged you.\n\n'{user['message']}'\n\nReply ASAP.\nRegards,\nNikhil"
+    send_mail(subject, message, from_mail, to_mail)
+
+
 @api_view(["POST"])
 def contact(request):
     name = request.data.get("name")
@@ -59,5 +70,6 @@ def contact(request):
         )
     collection.insert_one(user)
     send_thankyou_mail(user)
+    send_mail_to_me(user)
     response = {"message": "Success"}
     return JsonResponse(response, status=201)
