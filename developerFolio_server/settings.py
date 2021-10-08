@@ -117,10 +117,7 @@ USE_L10N = True
 
 USE_TZ = True
 
-CORS_ALLOW_ALL_ORIGINS = (
-    True  # If this is used then `CORS_ALLOWED_ORIGINS` will not have any effect
-)
-CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOWED_ORIGINS = ["https://nikhil-bhasin.netlify.app"]
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
