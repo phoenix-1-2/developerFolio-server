@@ -53,23 +53,29 @@ def send_mail_to_me(user):
 
 @api_view(["POST"])
 def contact(request):
-    name = request.data.get("name")
-    email = request.data.get("email")
-    message = request.data.get("message")
-    date = datetime.now()
+    try:
+        name = request.data.get("name")
+        email = request.data.get("email")
+        message = request.data.get("message")
+        date = datetime.now()
 
-    user = {"name": name, "email": email, "message": message, "date": date}
+        user = {"name": name, "email": email, "message": message, "date": date}
 
-    db = client["Contact_Information"]
-    collection = db["Contact_Information"]
+        db = client["Contact_Information"]
+        collection = db["Contact_Information"]
 
-    old_user = collection.find_one({"name": name, "email": email})
-    if old_user and (old_user["date"] < (datetime.now() + timedelta(days=7))):
-        return JsonResponse(
-            {"message": "Already has submitted query that is not answered"}, status=307
-        )
-    collection.insert_one(user)
-    send_thankyou_mail(user)
-    send_mail_to_me(user)
-    response = {"message": "Success"}
-    return JsonResponse(response, status=201)
+        old_user = collection.find_one({"name": name, "email": email})
+        if old_user and (old_user["date"] < (datetime.now() + timedelta(days=7))):
+            return JsonResponse(
+                {"message": "Already has submitted query that is not answered"},
+                status=307,
+            )
+        collection.insert_one(user)
+        send_thankyou_mail(user)
+        send_mail_to_me(user)
+        response = {"message": "Success"}
+        return JsonResponse(response, status=201)
+
+    except Exception:
+        response = {"message": "Some Error Occured"}
+        return JsonResponse(response, status=500)
