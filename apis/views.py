@@ -6,6 +6,8 @@ from django.conf import settings
 from django.core.mail import EmailMultiAlternatives
 from django.core.mail import send_mail
 
+EMAIL_LINK = "https://res.cloudinary.com/phoenix-redstone-04/raw/upload/v1633666528/contact_images/email_yydewd.html"
+
 client = settings.CLIENT
 
 
@@ -31,9 +33,7 @@ def send_thankyou_mail(user):
         user["email"],
     ]
     text_content = ""
-    html_content = requests.get(
-        "https://res.cloudinary.com/phoenix-redstone-04/raw/upload/v1633628764/contact_images/beefree-j4oeb9xlex_voljzf_ymjdro.html"
-    ).text
+    html_content = requests.get(EMAIL_LINK).text
     html_content = replace_from_template(html_content, user["name"])
     msg = EmailMultiAlternatives(subject, text_content, from_mail, to_mail)
     msg.attach_alternative(html_content, "text/html")
