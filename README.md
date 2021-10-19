@@ -14,7 +14,6 @@ EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 EMAIL_HOST_USER = "email@email.com"
 EMAIL_HOST_PASSWORD = "password"
-
 ```
 
 ### Using send_mail
@@ -56,7 +55,6 @@ curl --location --request POST 'https://developerfolio-server.herokuapp.com/apis
 --form 'name="Rahul"' \
 --form 'email="example@example.com"' \
 --form 'message="Hey,There!!"'
-
 ```
 
 ### Javascript
@@ -77,7 +75,6 @@ fetch("https://developerfolio-server.herokuapp.com/apis/contact", requestOptions
   .then(response => response.text())
   .then(result => console.log(result))
   .catch(error => console.log('error', error));
-
 ```
 
 ### Python 
@@ -98,5 +95,4 @@ headers = {}
 response = requests.request("POST", url, headers=headers, data=payload, files=files)
 
 print(response.text)
-
 ```
