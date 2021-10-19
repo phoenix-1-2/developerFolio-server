@@ -4,11 +4,9 @@ Contact Form API that involves sending Thanking You Mail from the contacting ema
 
 ## Django Sending Email 
 <br />
-
 ### Option 1
 
 ```from django.core.mail import send_mail
-
 def send_mail_django(user):
     subject = f"Hey Nikhil,{user['name']} Messaged You!!"
     from_mail = settings.EMAIL_HOST_USER
@@ -21,7 +19,6 @@ def send_mail_django(user):
 ```
 <br />
 ### Option 2
-
 ```from django.core.mail import EmailMultiAlternatives
 
 def send_mail_django(user):
