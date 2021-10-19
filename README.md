@@ -7,7 +7,6 @@ Contact Form API that involves sending Thanking You Mail from the contacting ema
 settings.py
 
 ```
-
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST = "smtp.gmail.com"
 EMAIL_USE_TLS = True
@@ -29,7 +28,6 @@ def send_mail_django():
     message = f"Hey,Nikhil Here !!"
     send_mail(subject, message, from_mail, to_mail)
 ```
-<br>
 
 ### Using EmailMultiAlternatives ( Best for Email Templates)
 ```
@@ -39,7 +37,7 @@ def send_mail_django():
     subject = f"Hey,Nikhil Here !!"
     from_mail = settings.EMAIL_HOST_USER
     to_mail = [
-        user["email"],
+       "email@email.com",
     ]
     text_content = ""
     html_content = "<h1>Thank You !!</h1>"
