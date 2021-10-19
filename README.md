@@ -7,8 +7,8 @@ Contact Form API that involves sending Thanking You Mail from the contacting ema
 ```
 curl --location --request POST 'https://developerfolio-server.herokuapp.com/apis/contact' \
 --form 'name="Rahul"' \
---form 'email="fake-api@nikhil124738838o397r9.com"' \
---form 'message="Hey"'
+--form 'email="example@example.com"' \
+--form 'message="Hey,There!!"'
 
 ```
 
@@ -17,8 +17,8 @@ curl --location --request POST 'https://developerfolio-server.herokuapp.com/apis
 ```
 var formdata = new FormData();
 formdata.append("name", "Rahul");
-formdata.append("email", "fake-api@nikhil124738838o397r9.com");
-formdata.append("message", "Hey");
+formdata.append("email", "example@example.com");
+formdata.append("message", "Hey,There!!");
 
 var requestOptions = {
   method: 'POST',
@@ -32,3 +32,27 @@ fetch("https://developerfolio-server.herokuapp.com/apis/contact", requestOptions
   .catch(error => console.log('error', error));
 
 ```
+
+### Python 
+
+```
+import requests
+
+url = "https://developerfolio-server.herokuapp.com/apis/contact"
+
+payload={'name': 'Rahul',
+'email': 'example@example.com',
+'message': 'Hey,There!!'}
+files=[
+
+]
+headers = {}
+
+response = requests.request("POST", url, headers=headers, data=payload, files=files)
+
+print(response.text)
+
+```
+
+
+
