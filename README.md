@@ -3,8 +3,8 @@
 Contact Form API that involves sending Thanking You Mail from the contacting email_id provided.
 
 ## Django Sending Email 
-
 <br />
+
 ### Option 1
 
 ```from django.core.mail import send_mail
@@ -22,8 +22,7 @@ def send_mail_django(user):
 <br />
 ### Option 2
 
-```
-from django.core.mail import EmailMultiAlternatives
+```from django.core.mail import EmailMultiAlternatives
 
 def send_mail_django(user):
     subject = f"Hey {user['name']}, Nikhil Here !!"
@@ -42,8 +41,7 @@ def send_mail_django(user):
 <br />
 ### cURL
 
-```
-curl --location --request POST 'https://developerfolio-server.herokuapp.com/apis/contact' \
+```curl --location --request POST 'https://developerfolio-server.herokuapp.com/apis/contact' \
 --form 'name="Rahul"' \
 --form 'email="example@example.com"' \
 --form 'message="Hey,There!!"'
@@ -52,8 +50,7 @@ curl --location --request POST 'https://developerfolio-server.herokuapp.com/apis
 <br />
 ### Javascript
 
-```
-var formdata = new FormData();
+```var formdata = new FormData();
 formdata.append("name", "Rahul");
 formdata.append("email", "example@example.com");
 formdata.append("message", "Hey,There!!");
@@ -74,8 +71,7 @@ fetch("https://developerfolio-server.herokuapp.com/apis/contact", requestOptions
 <br />
 ### Python 
 
-```
-import requests
+```import requests
 
 url = "https://developerfolio-server.herokuapp.com/apis/contact"
 
