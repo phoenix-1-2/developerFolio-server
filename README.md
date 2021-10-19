@@ -2,7 +2,7 @@
 
 Contact Form API that involves sending Thanking You Mail from the contacting email_id provided.
 
-# CURL REQUEST
+## CURL REQUEST
 
 ```
 curl --location --request POST 'https://developerfolio-server.herokuapp.com/apis/contact' \
@@ -11,5 +11,3 @@ curl --location --request POST 'https://developerfolio-server.herokuapp.com/apis
 --form 'message="Hey"'
 
 ```
-
-API ENDPOINT : [POST] https://developerfolio-server.herokuapp.com/apis/contact
