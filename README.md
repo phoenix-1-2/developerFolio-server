@@ -6,8 +6,8 @@ Contact Form API that involves sending Thanking You Mail from the contacting ema
 
 <br />
 ### Option 1
-```
-from django.core.mail import send_mail
+
+```from django.core.mail import send_mail
 
 def send_mail_django(user):
     subject = f"Hey Nikhil,{user['name']} Messaged You!!"
@@ -18,8 +18,6 @@ def send_mail_django(user):
     ]
     message = f"Hey Nikhil,\n{user['name']} has messaged you.\n\n'{user['message']}'\n\nReply ASAP.\nRegards,\nNikhil"
     send_mail(subject, message, from_mail, to_mail)
-    
-
 ```
 <br />
 ### Option 2
