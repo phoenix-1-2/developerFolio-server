@@ -3,7 +3,7 @@
 Contact Form API that involves sending Thanking You Mail from the contacting email_id provided.
 
 ## Django Sending Email 
-(https://docs.djangoproject.com/en/3.2/topics/email/) \\
+(https://docs.djangoproject.com/en/3.2/topics/email/)
 
 settings.py
 
