@@ -76,6 +76,7 @@ def contact(request):
         response = {"message": "Success"}
         return JsonResponse(response, status=201)
 
-    except Exception:
+    except Exception as e:
+        raise e
         response = {"message": "Some Error Occured"}
         return JsonResponse(response, status=500)
