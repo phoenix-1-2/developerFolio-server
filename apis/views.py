@@ -54,11 +54,21 @@ def send_mail_to_me(user):
 @api_view(["POST"])
 def contact(request):
     try:
+        with open("./profanity.txt") as file_obj:
+            profanity_list = file_obj.read().splitlines()
         name = request.data.get("name")
         email = request.data.get("email")
         message = request.data.get("message")
         date = datetime.now()
 
+        if (
+            any(word in message.lower() for word in profanity_list)
+            or any(word in email.lower() for word in profanity_list)
+            or any(word in name.lower() for word in profanity_list)
+        ):
+            return JsonResponse(
+                {"message": "Profanity not allowed in message"}, status=400
+            )
         user = {"name": name, "email": email, "message": message, "date": date}
 
         db = client["Contact_Information"]
