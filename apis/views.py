@@ -5,6 +5,7 @@ import requests
 from django.conf import settings
 from django.core.mail import EmailMultiAlternatives
 from django.core.mail import send_mail
+from profanity import profanity_list
 
 EMAIL_LINK = "https://res.cloudinary.com/phoenix-redstone-04/raw/upload/v1633666528/contact_images/email_yydewd.html"
 
@@ -45,26 +46,22 @@ def send_mail_to_me(user):
     from_mail = settings.EMAIL_HOST_USER
     to_mail = [
         "bhasin.nikhil.12@gmail.com",
-        "nikhil.bhasin124@gmail.com",
+        "varunasharmafb@gmail.com",
     ]
-    message = f"Hey Nikhil,\n{user['name']} has messaged you.\n\n'{user['message']}'\n\nReply ASAP.\nRegards,\nNikhil"
+    message = f"Hey,\n{user['name']} has messaged you.\n\n'{user['message']}'\n\nReply ASAP.\nRegards,\nNikhil"
     send_mail(subject, message, from_mail, to_mail)
 
 
 @api_view(["POST"])
 def contact(request):
     try:
-        with open("./profanity.txt") as file_obj:
-            profanity_list = file_obj.read().splitlines()
         name = request.data.get("name")
         email = request.data.get("email")
         message = request.data.get("message")
         date = datetime.now()
 
-        if (
-            any(word in message.lower() for word in profanity_list)
-            or any(word in email.lower() for word in profanity_list)
-            or any(word in name.lower() for word in profanity_list)
+        if any(word in message.lower() for word in profanity_list) or any(
+            word in name.lower() for word in profanity_list
         ):
             return JsonResponse(
                 {"message": "Profanity language not allowed"}, status=400
