@@ -5,7 +5,8 @@ on:
     branches: [main]
   push:
     branches: [main]
-
+env:
+    SECRET_KEY: ${{ secrets.SECRET_KEY }}
 jobs:
   health-checkup-job: #Check the healthy by running tests
     runs-on: ubuntu-latest
