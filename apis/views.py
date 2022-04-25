@@ -14,11 +14,7 @@ client = settings.CLIENT
 
 def replace(html_content, search_string, replace_string):
     index = html_content.find(search_string)
-    html_content = (
-        html_content[:index]
-        + replace_string
-        + html_content[index + len(search_string) :]
-    )
+    html_content = html_content[:index] + replace_string + html_content[index + len(search_string) :]
     return html_content
 
 
@@ -63,9 +59,7 @@ def contact(request):
         if any(word in message.lower() for word in profanity_list) or any(
             word in name.lower() for word in profanity_list
         ):
-            return JsonResponse(
-                {"message": "Profanity language not allowed"}, status=400
-            )
+            return JsonResponse({"message": "Profanity language not allowed"}, status=400)
         user = {"name": name, "email": email, "message": message, "date": date}
 
         db = client["Contact_Information"]
