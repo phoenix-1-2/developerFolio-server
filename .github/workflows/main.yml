@@ -14,7 +14,6 @@ jobs:
       max-parallel: 4
       matrix:
         python-version: [3.9]
-
     steps:
       - uses: actions/checkout@v3
       - name: Set up Python ${{ matrix.python-version }}
@@ -30,14 +29,29 @@ jobs:
 #           python manage.py test
       - name: Check Syntax
         run: black . --check -l 120
-  deploy-job:
+  deployment:
       runs-on: ubuntu-latest
-      needs: [health-checkup-job]
-      if: ${{ github.event_name == 'push' }}
       steps:
-        - uses: actions/checkout@v2
-        - uses: akhileshns/heroku-deploy@v3.12.12
+        - name: Check out repository
+          uses: actions/checkout@v2
           with:
-            heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-            heroku_app_name: ${{secrets.HEROKU_APP_NAME}}
-            heroku_email: ${{secrets.HEROKU_EMAIL}}
+            fetch-depth: 0
+        - name: Heroku login credentials
+          run: |
+            cat > ~/.netrc <<EOF
+              machine api.heroku.com
+                login $HEROKU_EMAIL
+                password $HEROKU_API_KEY
+              machine git.heroku.com
+                login $HEROKU_EMAIL
+                password $HEROKU_API_KEY
+            EOF
+          env:
+            HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+            HEROKU_EMAIL: ${{ secrets.HEROKU_EMAIL }}
+        - name: Add Heroku remote
+          run: heroku git:remote --app $HEROKU_APP_NAME
+          env:
+            HEROKU_APP_NAME: ${{ secrets.HEROKU_APP_NAME }}
+        - name: Push to Heroku
+          run: git push heroku master
