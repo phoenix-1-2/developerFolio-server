@@ -84,7 +84,12 @@ WSGI_APPLICATION = "developerFolio_server.wsgi.application"
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
-
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",  # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
+        "NAME": "/var/www/mysite/sqlite.db",  # Or path to database file if using sqlite3.
+    }
+}
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
 
