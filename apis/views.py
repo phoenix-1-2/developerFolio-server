@@ -6,6 +6,7 @@ from django.conf import settings
 from django.core.mail import EmailMultiAlternatives
 from django.core.mail import send_mail
 from profanity import profanity_list
+from multiprocessing import Pool
 
 EMAIL_LINK = "https://res.cloudinary.com/phoenix-redstone-04/raw/upload/v1633666528/contact_images/email_yydewd.html"
 
@@ -55,8 +56,8 @@ def contact(request):
         message = request.data.get("message")
         date = datetime.now()
 
-        if any(word in message.lower() for word in profanity_list) or any(
-            word in name.lower() for word in profanity_list
+        if any(word in profanity_list for word in message.lower().split()) or any(
+            word in profanity_list for word in name.lower().split()
         ):
             return JsonResponse({"message": "Profanity language not allowed"}, status=400)
         user = {"name": name, "email": email, "message": message, "date": date}
@@ -71,8 +72,9 @@ def contact(request):
                 status=307,
             )
         collection.insert_one(user)
-        send_thankyou_mail(user)
-        send_mail_to_me(user)
+        pool = Pool()
+        pool.apply_async(send_thankyou_mail, args=(user,))
+        pool.apply_async(send_mail_to_me, args=(user,))
         response = {"message": "Success"}
         return JsonResponse(response, status=201)
 

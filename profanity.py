@@ -1,3 +1,5 @@
+import numpy as np
+
 profanity_list = [
     "aand",
     "aandu",
@@ -525,3 +527,4 @@ profanity_list = [
     "zoophilia",
     "🖕",
 ]
+profanity_list = np.array(profanity_list)
