@@ -43,8 +43,6 @@ def send_mail_to_me(user):
     from_mail = settings.EMAIL_HOST_USER
     to_mail = [
         "bhasin.nikhil.12@gmail.com",
-        "varunasharmafb@gmail.com",
-        "nikhil.bhasin124@gmail.com",
     ]
     message = f"Hey,\n{user['name']} has messaged you.\n\n'{user['message']}'\n\nReply ASAP.\nRegards,\nNikhil"
     send_mail(subject, message, from_mail, to_mail)
